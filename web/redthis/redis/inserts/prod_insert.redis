@@ -1,0 +1,13 @@
+set key value
+set "FDR" "The only thing we have to fear is fear itself."
+set "Shakespeare" "To be, or not to be, that is the question."
+set "Mandela" "The greatest glory in living lies not in never falling, but in rising every time we fall."
+set "Theodore Roosevelt" "Believe you can and you're halfway there."
+set "Disney" "All our dreams can come true, if we have the courage to pursue them."
+
+set "admin" "User"
+set "admin_password" "I_HopeYou4re8admin_iLoveTechn070g_9283910"
+set "fake_flag" "I told you"
+set "flag_7392ilj8i32" "byuctf{al1w4ys_s2n1tize_1nput-5ed1s_eik4oc85nxz}"
+set "inner_thoughts" "Never gonna give you up, never gonna let you down, Never gonna run around and desert you, Never gonna make you cry, never gonna say goodbye, Never gonna tell a lie and hurt you"
+JSON.SET admin_options $ '["inner_thoughts", "fake_flag", "flag_7392ilj8i32"]'

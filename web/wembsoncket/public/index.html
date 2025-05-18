@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wembsoncket</title>
+  <style>
+    /* CSS Variables for easy theme management */
+    :root {
+      --primary-color: #4CAF50;
+      --hover-color: #45a049;
+      --bg-color: #f4f4f9;
+      --text-color: #333;
+      --message-bg: #f1f1f1;
+      --sender-color-bot: #00796b;
+      --sender-color-you: #4CAF50;
+      --button-bg: #4CAF50;
+    }
+
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .chat-container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 900px;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      position: relative;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: var(--text-color);
+    }
+
+    #messages {
+      flex-grow: 1;
+      overflow-y: auto;
+      margin-bottom: 15px;
+      padding-right: 10px;
+      padding-left: 10px;
+    }
+
+    #messages div {
+      padding: 8px;
+      margin-bottom: 10px;
+      background-color: var(--message-bg);
+      border-radius: 5px;
+      word-wrap: break-word;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sender-bot {
+      background-color: #e0f7fa;
+    }
+
+    .sender-name-bot {
+      color: var(--sender-color-bot);
+      font-weight: bold;
+    }
+
+    .sender-name-you {
+      color: var(--sender-color-you);
+      font-weight: bold;
+    }
+
+    .input-container {
+      display: flex;
+      gap: 10px;
+    }
+
+    #messageInput {
+      flex-grow: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: var(--button-bg);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: var(--hover-color);
+    }
+
+    #overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      visibility: hidden;
+    }
+
+    #overlay.visible {
+      visibility: visible;
+    }
+
+    #overlay h2 {
+      color: white;
+      margin-bottom: 20px;
+      font-weight: 100;
+    }
+
+    #reconnectBtn {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: var(--button-bg);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="chat-container">
+    <h1>Chat Room</h1>
+    <div id="messages"></div>
+    <div class="input-container">
+      <input type="text" id="messageInput" placeholder="Type a message..." />
+      <button id="sendBtn">Send</button>
+    </div>
+    <div id="overlay">
+      <h2>WebSocket disconnected</h2>
+      <button id="reconnectBtn">Reconnect</button>
+    </div>
+  </div>
+
+  <script>
+    let socket;
+
+    // Initialize WebSocket connection
+    function initWebSocket() {
+      socket = new WebSocket('wss://wembsoncket.chal.cyberjousting.com');
+
+      socket.onopen = () => {
+        toggleOverlay(false);
+      };
+
+      socket.onmessage = (event) => {
+        const messageData = JSON.parse(event.data);
+        displayMessage(messageData.sender, messageData.message, 'sender-bot');
+      };
+
+      socket.onclose = () => {
+        toggleOverlay(true);
+      };
+
+      socket.onerror = (error) => {
+        console.error('WebSocket error:', error);
+      };
+    }
+
+    // Display message in the chat
+    function displayMessage(sender, message, senderClass) {
+      const messagesDiv = document.getElementById('messages');
+      const messageElement = document.createElement('div');
+      const senderNameElement = document.createElement('span');
+      senderNameElement.textContent = `${sender}: `;
+      senderNameElement.classList.add(sender === 'You' ? 'sender-name-you' : 'sender-name-bot');
+
+      const messageContentElement = document.createElement('span');
+      messageContentElement.textContent = message;
+
+      messageElement.appendChild(senderNameElement);
+      messageElement.appendChild(messageContentElement);
+      messageElement.classList.add(senderClass);
+
+      messagesDiv.appendChild(messageElement);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll to bottom
+    }
+
+    // Send message to the server and display it locally
+    function sendMessage() {
+      const messageInput = document.getElementById('messageInput');
+      const message = messageInput.value.trim();
+
+      if (message === '') return;
+
+      socket.send(JSON.stringify({ sender: 'user', message }));
+      displayMessage('You', message, 'sender-user');
+      messageInput.value = ''; // Clear input field
+    }
+
+    // Toggle overlay visibility
+    function toggleOverlay(visible) {
+      const overlay = document.getElementById('overlay');
+      overlay.classList.toggle('visible', visible);
+    }
+
+    // Attach event listeners
+    document.getElementById('sendBtn').addEventListener('click', sendMessage);
+
+    // Allow sending message with Enter key
+    document.getElementById('messageInput').addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        sendMessage();
+      }
+    });
+
+    document.getElementById('reconnectBtn').addEventListener('click', () => {
+      initWebSocket();
+    });
+
+    // Initialize WebSocket connection on page load
+    initWebSocket();
+  </script>
+</body>
+</html>

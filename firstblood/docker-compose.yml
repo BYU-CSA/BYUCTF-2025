@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  ctfd-notifier:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./notified_challenges.json:/app/notified_challenges.json
+    restart: always

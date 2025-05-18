@@ -1,0 +1,4 @@
+# Schedule scraper1 to run every hour
+* * * * * root /usr/local/bin/python3 /app/main.py >> /var/log/cron.log 2>&1
+
+# Ensure cron logs are written to stdout

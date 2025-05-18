@@ -1,0 +1,20 @@
+{
+  "name": "chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "puppeteer": "^22.7.1",
+    "uuid": "^11.0.3",
+    "ws": "^8.18.0"
+  }
+}

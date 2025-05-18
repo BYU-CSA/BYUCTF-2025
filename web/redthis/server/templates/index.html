@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Red This</title>
+</head>
+<body>
+    {% if session %}
+    <h1>Hello {{session.username}}! Welcome to my website!</h1>
+    {% else %}
+    <h1>Hello! Welcome to my website!</h1>
+    {% endif %}
+    <p>A friend told me that SQL is broken and I should use No SQL databases. Haha No SQL injection here!</p>
+
+    <h2>Click on a name to see a famous quote!</h2>
+    <form id=quote_form action="/get_quote" method="POST" >
+        <label for="selector">Choose a famous person</label> 
+        <select id="selector" name="famous_person" form="quote_form">
+            <option value="FDR">Franklin D. Roosevelt</option>
+            <option value="Shakespeare">William Shakespeare</option>
+            <option value="Mandela">Nelson Mandela</option>
+            <option value="Theodore Roosevelt">Theodore Roosevelt</option>
+            <option value="Disney">Walt Disney</option>
+
+        {% if adminOptions %}
+            {% for option in adminOptions %}
+            <option value="{{option}}">{{option}}</option>
+            {% endfor %}
+        {% endif %}
+        </select>
+        <input type="submit" value="Submit">
+
+    </form>
+    {% if quote %}
+        <div>
+            <p><b>{{quote[0]}}</b>: "{{quote[1]}}"</p>
+        </div>
+    {% endif %}
+</body>
+</html>

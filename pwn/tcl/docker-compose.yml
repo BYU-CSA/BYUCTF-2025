@@ -1,0 +1,9 @@
+services:
+  tcl:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5004:5000"
+    privileged: true

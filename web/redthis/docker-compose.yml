@@ -1,0 +1,16 @@
+services:
+  redthis-web:
+    restart: always
+    build:
+      context: ./server/
+      dockerfile: Dockerfile
+    ports: 
+      - "5005:1337"
+    depends_on:
+      - redthis-redis
+
+  redthis-redis:
+    restart: always
+    build:
+      context: ./redis/
+      dockerfile: Dockerfile

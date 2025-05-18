@@ -1,0 +1,156 @@
+/* Existing CSS styles... */
+
+/* Alert styles */
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.alert.success {
+    color: #3c763d;
+    border: 1px solid #3c763d;
+    background-color: #dff0d8;
+}
+
+.alert.error {
+    color: red;
+    border: 1px solid red;
+    background-color: #ffdede;
+}
+
+.alert.info {
+    color: rgb(77, 103, 190);
+    border: 1px solid rgb(77, 103, 190);
+    background-color: #d0e1f5;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Container styles */
+.container {
+    max-width: 400px; /* Adjusted width */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styles */
+h1 {
+    color: #333;
+}
+
+/* Paragraph styles */
+p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Strong styles */
+strong {
+    font-weight: bold;
+}
+
+/* Image styles */
+img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Form styles */
+form {
+    margin-top: 20px;
+    text-align: center; 
+}
+
+/* Button styles */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 300px; /* Adjusted width */
+}
+
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:active {
+    background-color: #3e8e41;
+}
+
+button:focus {
+    outline: none;
+}
+
+/* Label styles */
+label {
+    font-weight: bold;
+}
+
+/* Input styles */
+input[type="text"],
+input[type="password"],
+input[type="submit"] {
+    width: 300px; /* Adjusted width */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: block;
+    margin: 0 auto;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+input[type="submit"]:active {
+    background-color: #3e8e41;
+}
+
+/* Paragraph styles */
+p {
+    text-align: center;
+}
+
+/* Anchor styles */
+a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Background image styles */
+body {
+    background-image: url("static/images/login_background_image.png");
+    background-size: cover;
+    background-position: center;
+}
+

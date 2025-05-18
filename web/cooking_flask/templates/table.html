@@ -1,0 +1,76 @@
+<!-- table.html -->
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* Adjust width and overflow settings as needed */
+    td {
+        max-width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+
+<table>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>    
+    <thead>
+            <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Instructions</th>
+            <th>Tags</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for item in items %}
+            <tr>
+                <td>
+                    <a href="/recipe?recipe_id={{ item.0.recipe_id }}">{{ item.0.recipe_name }}</a>
+                    <br>
+                    {% include 'buttons.html' %}
+                </td>
+
+                <td>{{ item.0.recipe_description }}</td>
+
+                <td>{{ item.0.instructions }}</td>
+
+                <td>{{ item.0.tags }}</td>
+
+                <td>
+                    {% if item.0.recipe_image %}
+                        {% set image_data = item.0.recipe_image %}
+                        {% if image_data.startswith('data:image/png;base64,') %}
+                            <img src="{{ image_data }}" alt="{{ item.0.recipe_name }}" style="width: calc(20vh); height: calc(20vh);">
+                        {% elif image_data[:4] == 'iVBORw' %}  {# Magic number for PNG #}
+                            <img src="data:image/png;base64,{{ image_data }}" alt="{{ item.0.recipe_name }}" style="width: calc(20vh); height: calc(20vh);">
+                        {% elif image_data.startswith('data:image/jpeg;base64,') %}
+                            <img src="{{ image_data }}" alt="{{ item.0.recipe_name }}" style="width: calc(20vh); height: calc(20vh);">
+                        {% elif image_data.startswith('data:image/jpg;base64,') %}
+                            <img src="{{ image_data }}" alt="{{ item.0.recipe_name }}" style="width: calc(20vh); height: calc(20vh);">
+                        {% elif image_data[:2] == '/9' or image_data[:2] == 'iV' %}  {# Magic number for JPEG #}
+                            <img src="data:image/jpeg;base64,{{ image_data }}" alt="{{ item.0.recipe_name }}" style="width: calc(20vh); height: calc(20vh);">
+                        {% endif %}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,9 @@
+services:
+  hash-based-crypto:
+    restart: always
+    privileged: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5000"

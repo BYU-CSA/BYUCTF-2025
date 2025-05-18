@@ -1,0 +1,9 @@
+services:
+  minecraft_youtuber:
+    restart: always
+    privileged: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5000"

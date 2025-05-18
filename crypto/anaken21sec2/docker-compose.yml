@@ -1,0 +1,9 @@
+services:
+  anaken21sec2:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    privileged: true

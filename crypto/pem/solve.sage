@@ -1,0 +1,9 @@
+from Crypto.PublicKey import RSA
+from Crypto.Util.number import long_to_bytes
+from base64 import b64decode
+
+with open("ssh_host_rsa_key.pub", "r") as f:
+    key = RSA.importKey(f.read())
+    n = key.n
+    flag = long_to_bytes(int(sqrt(n)))
+    print(flag.decode())

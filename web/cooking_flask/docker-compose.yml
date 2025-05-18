@@ -1,0 +1,10 @@
+services:
+  cooking-flask:
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "5001:1337"
+    volumes:
+      - ./cooking.sqlite:/ctf/cooking.sqlite:ro

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body style="background-image: url('https://botanicalinstitute.org/wp-content/uploads/2022/02/books-on-adaptogens.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <div style="background-color:bisque; width: 50%; padding: 30px; border-radius: 8px;">
+        <div class="login-container">
+            <h1 style="text-align: center;">Login</h1>
+            <form action="/login" method="post">
+                <label for="username">Username or Email:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <input type="submit" value="Login" style="width: 100%;">
+            </form>
+            <p style="text-align: center;">Don't have an account? <a href="/register">Register here</a></p>
+        </div>
+    </div>
+</body>
+</html>

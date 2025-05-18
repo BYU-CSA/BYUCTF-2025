@@ -1,0 +1,115 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <!-- Sidebar CSS -->
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+            margin: 0;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 130px;  /* Same as the width of main */
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #cbcbcb;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .sidenav a {
+            text-decoration: none;
+            display: block;
+            padding: 6px;
+            text-align: center;
+        }
+
+        .sidenav img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .sidenav a:hover img {
+            filter: brightness(1.1);
+        }
+
+        .sidenav a:hover {
+            background-color: #99c3cf;
+        }
+
+        .main {
+            margin-left: 130px; /* Same as the width of the sidenav */
+            font-size: 18px;
+            padding: 20px;
+        }
+
+        .flash-message {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid;
+            border-radius: 5px;
+        }
+
+        .flash-success {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+
+        .flash-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidenav">
+        <a href="/">
+            <img src="/static/images/cookbook.png" alt="Cookbook">
+        </a>
+        <a href="/try_recipes">
+            <img src="/static/images/try.png" alt="My Try List">
+        </a>
+        <a href="/search">
+            <img src="/static/images/search.png" alt="Search">
+        </a>
+        <a href="/create_recipe">
+            <img src="/static/images/create_recipe.png" alt="Create Recipe">
+        </a>
+        <a href="/me">
+            <img src="/static/images/me.png" alt="Me">
+        </a>
+    </div>
+
+    <!-- Main content -->
+    <div class="main">
+        <!-- Flash messages -->
+        <div id="flash-messages">
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    <ul>
+                        {% for category, message in messages %}
+                            <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>

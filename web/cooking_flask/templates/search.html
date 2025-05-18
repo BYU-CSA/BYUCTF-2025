@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+    {% extends 'base.html' %}
+
+    {% block title %}
+        Home - My Website
+    {% endblock %}
+
+    {% block content %}
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>List of Owned Items</title>
+            <link rel="stylesheet" href="static/css/styles.css">
+        </head>
+        <body>
+            <!-- Code for adding a new item -->
+            <h2>Search for your new favorite recipe</h2>
+            <form action="/search" method="get">
+                <!-- Name -->
+                <label for="recipe_name">Recipe Name:</label>
+                <input type="text" id="recipe_name" name="recipe_name">
+                <br>
+                <!-- Description -->
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description">
+                <br>
+                <!-- Tags -->
+                <fieldset>
+                    <legend>Tags:</legend>
+                    <label><input type="checkbox" name="tags" value="Dessert">Dessert</label>
+                    <label><input type="checkbox" name="tags" value="Lunch">Lunch</label>
+                    <label><input type="checkbox" name="tags" value="Breakfast">Breakfast</label>
+                    <label><input type="checkbox" name="tags" value="Gluten Free">Gluten Free</label>
+                    <label><input type="checkbox" name="tags" value="Vegetarian">Vegetarian</label>
+                    <label><input type="checkbox" name="tags" value="Vegan">Vegan</label>
+                    <label><input type="checkbox" name="tags" value="Includes Nuts">Includes Nuts</label>
+                </fieldset>
+                <br>
+                <!-- Submit Button -->
+                <input type="submit" value="Search">
+            </form>
+            
+
+            <!-- Code for listing owned items -->
+            {% if request.args and items %}
+            <ul>
+                <!-- This is some python jinja2 code. Only existing items will be displayed. -->
+                {% include 'table.html' %}
+            </ul>
+            {% elif request.args %}
+                <p>No search results found.</p>
+            {% else %}
+                <p>Please perform a search.</p>
+            {% endif %}
+        </body>
+    {% endblock %}
+
+</html>

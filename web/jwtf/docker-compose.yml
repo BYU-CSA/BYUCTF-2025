@@ -1,0 +1,8 @@
+services:
+  jwtf:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5002:1337"

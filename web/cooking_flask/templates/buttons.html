@@ -1,0 +1,46 @@
+<style>
+    button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+</style>
+
+{% if item.2 %}
+    <form action="/remove_recipe_from_pcb" method="post" style="display: inline;">
+        <input type="hidden" name="recipe_id" value="{{ item.0.recipe_id }}">
+        <button type="submit" class="btn" style="background-color: red; color: white;">
+            <i class="fas fa-trash" aria-hidden="true"></i> Remove from Cookbook
+        </button>
+    </form>
+{% else %}
+    <form action="/add_to_personal_cookbook" method="post" style="display: inline;">
+        <input type="hidden" name="recipe_id" value="{{ item.0.recipe_id }}">
+        <input type="hidden" name="user_id" value="{{ session['user_id'] }}">
+        <button type="submit" class="btn" style="padding: 0px 6px;">
+            &#x2764; Add to Cookbook
+        </button>
+    </form>
+
+    <br>
+
+    {% if item.1 %}
+        <form action="/remove_recipe_from_try_list" method="post" style="display: inline;">
+            <input type="hidden" name="recipe_id" value="{{ item.0.recipe_id }}">
+            <button type="submit" class="btn" style="background-color:maroon; color: white;">
+                <i class="fas fa-trash" aria-hidden="true"></i> Remove from Try List
+            </button>
+        </form>
+    {% else %}
+        <form action="/add_to_try_list" method="post" style="display: inline;">
+            <input type="hidden" name="recipe_id" value="{{ item.0.recipe_id }}">
+            <input type="hidden" name="user_id" value="{{ session['user_id'] }}">
+            <button type="submit" class="btn" style="padding: 0px 6px; background-color: darkcyan;">
+                Add to Try List
+            </button>
+        </form>
+    {% endif %}
+{% endif %}
